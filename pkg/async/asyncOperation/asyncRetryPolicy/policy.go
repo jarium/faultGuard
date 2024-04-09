@@ -23,10 +23,6 @@ func (p *Policy) Apply(o *asyncOperation.Operation, h asyncOperation.Handler, c 
 
 		go h.Func(o, c)
 
-		err := <-c
-
-		if err != nil {
-			o.AddErrorWithPolicy(h.Id, "retry", err)
-		}
+		o.AddErrorWithPolicy(h.Id, "retry", <-c)
 	}
 }
