@@ -47,7 +47,14 @@ func (e *Executor) Run(o *asyncOperation.Operation) {
 
 			go h.Func(o, c)
 
-			e.applyPoliciesOnError(o, h, c)
+			err := <-c
+
+			if err == nil {
+				return
+			}
+
+			o.AddError(h.Id, err)
+			e.applyPolicies(o, h, c)
 		}(h, wg)
 	}
 
@@ -55,10 +62,12 @@ func (e *Executor) Run(o *asyncOperation.Operation) {
 	o.Done()
 }
 
-func (e *Executor) applyPoliciesOnError(o *asyncOperation.Operation, h asyncOperation.Handler, c chan error) {
-	o.AddError(h.Id, <-c)
-
+func (e *Executor) applyPolicies(o *asyncOperation.Operation, h asyncOperation.Handler, c chan error) {
 	for _, p := range h.Policies {
-		p.Apply(o, h, c)
+		err := p.Apply(o, h, c)
+
+		if err == nil { //one policy succeeded
+			return
+		}
 	}
 }

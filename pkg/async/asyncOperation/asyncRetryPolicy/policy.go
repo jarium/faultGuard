@@ -17,12 +17,22 @@ func New(maxRetries int, delayBetweenRetries time.Duration) *Policy {
 	}
 }
 
-func (p *Policy) Apply(o *asyncOperation.Operation, h asyncOperation.Handler, c chan error) {
+func (p *Policy) Apply(o *asyncOperation.Operation, h asyncOperation.Handler, c chan error) error {
+	var err error
+
 	for i := 0; i < p.maxRetries; i++ {
 		time.Sleep(p.delayBetweenRetries)
 
 		go h.Func(o, c)
 
-		o.AddErrorWithPolicy(h.Id, "retry", <-c)
+		err = <-c
+
+		if err == nil {
+			return nil
+		}
+
+		o.AddErrorWithPolicy(h.Id, "retry", err)
 	}
+
+	return err
 }
