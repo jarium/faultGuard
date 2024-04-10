@@ -1,7 +1,7 @@
 package executor
 
 import (
-	"faultGuard/pkg/sync/operation"
+	"github.com/jarium/faultGuard/pkg/sync/operation"
 	"sync"
 )
 

@@ -1,7 +1,7 @@
 package asyncRetryPolicy
 
 import (
-	"faultGuard/pkg/async/asyncOperation"
+	"github.com/jarium/faultGuard/pkg/async/asyncOperation"
 	"time"
 )
 

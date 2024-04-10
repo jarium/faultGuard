@@ -1,7 +1,7 @@
 package asyncExecutor
 
 import (
-	"faultGuard/pkg/async/asyncOperation"
+	"github.com/jarium/faultGuard/pkg/async/asyncOperation"
 	"sync"
 )
 

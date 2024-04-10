@@ -1,7 +1,7 @@
 package fallbackPolicy
 
 import (
-	"faultGuard/pkg/sync/operation"
+	"github.com/jarium/faultGuard/pkg/sync/operation"
 )
 
 type Policy struct {

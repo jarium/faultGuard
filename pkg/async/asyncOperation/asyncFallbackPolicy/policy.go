@@ -1,7 +1,7 @@
 package asyncFallbackPolicy
 
 import (
-	"faultGuard/pkg/async/asyncOperation"
+	"github.com/jarium/faultGuard/pkg/async/asyncOperation"
 )
 
 type Policy struct {
