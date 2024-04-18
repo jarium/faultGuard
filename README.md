@@ -1,5 +1,5 @@
 # faultGuard
-A package for golang apps, handling errors with defined policies to fortify fault tolerance.
+A package that handles errors with defined policies to fortify fault tolerance for golang apps.
 
 Installation
 ---
