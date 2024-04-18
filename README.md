@@ -1,9 +1,8 @@
 # faultGuard
+A package for golang apps, handling errors with defined policies to fortify fault tolerance.
 
 Installation
 ---
 ```bash
-export GOPRIVATE=github.com/jarium/faultGuard 
-
 go get github.com/jarium/faultGuard 
 ```
